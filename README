@@ -38,3 +38,15 @@
     c) Usage
 
          ./check_proxy_lb.ksh --help
+		 
+2 - check_ad.vbs
+
+    a) Description
+
+	    This plugin is use to check Active Directory with NRPE, the original plugin come from 
+        http://exchange.nagios.org/directory/Plugins/Operating-Systems/Windows/Active-Directory-%28AD%29-Check/details
+		I have added French language support with the detection of the page code (for the accented characters)
+		
+	c) Prerequisites
+	
+		- Support Tools (dcdiag.exe)
