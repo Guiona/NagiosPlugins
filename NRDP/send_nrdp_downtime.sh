@@ -1,4 +1,9 @@
 #!/usr/bin/ksh
+#
+# Author ONA Guillaume
+# Version 1.0
+# 
+
 
 # Fixed variables
 Now=`date +%s`
@@ -11,7 +16,7 @@ NagiosHost=
 Comment="Reboot"
 Duration=7200
 
-while getopts "c:d:H:s:t:" option ; do
+while getopts "c:d:hH:s:t:" option ; do
     case $option in
         c) # Comment
             Comment=$OPTARG
@@ -21,6 +26,11 @@ while getopts "c:d:H:s:t:" option ; do
             Duration=$OPTARG
             Duration=$(($Duration*60))
             End=$(($Now + $Duration))
+        ;;
+
+        h) # Usage
+           echo 'send_nrdp_downtime -H NagiosHost -c "Comment" -d "duration in minutes" -s "NRDP Server" -t "Nrdp Token"'
+           exit 1
         ;;
 
         H) # Host Nagios
