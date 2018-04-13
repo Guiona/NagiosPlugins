@@ -1,0 +1,1 @@
+Use NRDP to add a downtime on a Nagios host
