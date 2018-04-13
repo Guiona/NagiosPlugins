@@ -4,17 +4,25 @@
 # Version 1.0
 # 
 
+function usage {
+    echo 'send_nrdp_downtime -H NagiosHost [-c "Comment"] [-d "duration in minutes"] [-s "NRDP Server"] [-t "Nrdp Token"]
+       -c default value "Downtime from NRDP client"
+       -d default value 20 
+       -t default value b23r622e8bot787bn09g8789y458z11p'
+    exit 1
+}
+
 
 # Fixed variables
 Now=`date +%s`
 NagiosUser=admin
 
 # Variables
-NagiosServer=10.132.9.13
+NagiosServer=
 NrdpToken=b23r622e8bot787bn09g8789y458z11p
 NagiosHost=
-Comment="Reboot"
-Duration=7200
+Comment="Downtime from NRDP client"
+Duration=1200 # 20 Minutes
 
 while getopts "c:d:hH:s:t:" option ; do
     case $option in
@@ -29,8 +37,8 @@ while getopts "c:d:hH:s:t:" option ; do
         ;;
 
         h) # Usage
-           echo 'send_nrdp_downtime -H NagiosHost -c "Comment" -d "duration in minutes" -s "NRDP Server" -t "Nrdp Token"'
-           exit 1
+           usage
+           
         ;;
 
         H) # Host Nagios
@@ -46,6 +54,11 @@ while getopts "c:d:hH:s:t:" option ; do
         ;;
     esac
 done
+
+#
+if [[ ! -s $NagiosServer ]] ; then
+    usage
+fi
 
 # Generated URL
 #End=$(($Now + $Duration))
